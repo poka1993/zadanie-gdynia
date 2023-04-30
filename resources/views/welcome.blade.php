@@ -26,7 +26,7 @@
         </style>
     </head>
     <body>
-        <form>
+        <form method="POST" action="{{ route('exchangeValues') }}">
         @csrf
             <div>
                 <label for="first">Pierwsza wartość</label>
