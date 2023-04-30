@@ -23,7 +23,7 @@
             button {
                 margin-bottom: 5px;
             }
-            
+
             table {
                 margin-top: 5px;
             }
@@ -34,6 +34,16 @@
 
             tr {
                 text-align: center;
+            }
+
+            .pagination {
+                margin-top: 5px;
+            }
+            
+            .pagination a {
+                text-decoration: none;
+                color: #000;
+                margin: 3px;
             }
         </style>
     </head>
@@ -50,6 +60,21 @@
             </div>
             <button type="submit">Dodaj</button>
         </form>
+
+        <form action="{{ route('showValues') }}" method="GET">
+            <label for="sort">Sortuj według:</label>
+            <select name="sort" type="submit">
+                <option @if ($sort == 'id') selected @endif value="id">Id</option>
+                <option @if ($sort == 'firstIn') selected @endif value="firstIn">1 wartość In</option>
+                <option @if ($sort == 'secondIn') selected @endif value="secondIn">2 wartość In</option>
+                <option @if ($sort == 'firstOut') selected @endif value="firstOut">1 wartość Out</option>
+                <option @if ($sort == 'secondOut') selected @endif value="secondOut">2 wartość Out</option>
+                <option @if ($sort == 'created_at') selected @endif value="created_at">Data utworzenia</option>
+                <option @if ($sort == 'updated_at') selected @endif value="updated_at">Data edycji</option>
+            </select>
+            <button type="submit">Sortuj</button>
+        </form>
+
 
         <table width="100%" cellspacing="0" border="1">
             <thead>
@@ -77,5 +102,6 @@
                 @endforeach
             </tbody>
         </table>
+        {{ $records->links('pagination::semantic-ui') }}
     </body>
 </html>

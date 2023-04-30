@@ -28,9 +28,16 @@ class ValuesController extends Controller
 
     public function showValues(Request $request): View
     {
-        $records = DB::select('select * from history');
+        $sort = $request->get('sort');
+        if ($sort !== 'id' && $sort !== 'firstIn' && $sort !== 'secondIn' && $sort !== 'firstOut' && $sort !== 'secondOut' && $sort !== 'created_at' && $sort !== 'updated_at') {
+            $sort = 'id';
+        }
+        
+        $records = DB::table('history')->orderBy($sort, 'DESC')->paginate(10)->appends(request()->query());
+
         return view('welcome', [
             'records' => $records,
+            'sort' => $sort
         ]);
     }
 }
