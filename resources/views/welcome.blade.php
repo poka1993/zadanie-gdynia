@@ -23,6 +23,18 @@
             button {
                 margin-bottom: 5px;
             }
+            
+            table {
+                margin-top: 5px;
+            }
+
+            th {
+                background-color: #ccc;
+            }
+
+            tr {
+                text-align: center;
+            }
         </style>
     </head>
     <body>
@@ -38,5 +50,32 @@
             </div>
             <button type="submit">Dodaj</button>
         </form>
+
+        <table width="100%" cellspacing="0" border="1">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>1 wartość In</th>
+                    <th>2 wartość In</th>
+                    <th>1 wartość Out</th>
+                    <th>2 wartość Out</th>
+                    <th>Data utworzenia</th>
+                    <th>Data edycji</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($records ?? [] as $record)
+                <tr>
+                    <td>{{ $record->id }}</td>
+                    <td>{{ $record->firstIn }}</td>
+                    <td>{{ $record->secondIn }}</td>
+                    <td>{{ $record->firstOut }}</td>
+                    <td>{{ $record->secondOut }}</td>
+                    <td>{{ $record->created_at }}</td>
+                    <td>{{ $record->updated_at }}</td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
     </body>
 </html>

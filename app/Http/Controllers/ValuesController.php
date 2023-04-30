@@ -9,7 +9,7 @@ date_default_timezone_set('Europe/Warsaw');
 
 class ValuesController extends Controller
 {
-    public function exchangeValues(Request $request): View
+    public function exchangeValues(Request $request)
     {
         $first = (int)$request->get('first');
         $second = (int)$request->get('second');
@@ -23,6 +23,14 @@ class ValuesController extends Controller
         $first = $second - $first;       
         DB::update('update history set firstOut = ? , secondOut = ?, updated_at = ? where id = ?', [$first, $second, now(), $id]);
 
-        return view('welcome');
+        return redirect()->route('showValues');
+    }
+
+    public function showValues(Request $request): View
+    {
+        $records = DB::select('select * from history');
+        return view('welcome', [
+            'records' => $records,
+        ]);
     }
 }

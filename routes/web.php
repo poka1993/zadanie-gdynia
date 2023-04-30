@@ -14,8 +14,6 @@ use App\Http\Controllers\ValuesController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
+Route::get('/', [ValuesController::class, 'showValues'])->name('showValues');
 Route::post('/exchange/values', [ValuesController::class, 'exchangeValues'])->name('exchangeValues');
